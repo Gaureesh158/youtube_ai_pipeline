@@ -1,7 +1,9 @@
 import openai
 from utils import read_file, write_file, split_segments
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+import os
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 def generate_script(topic):
     prompt = f"""
