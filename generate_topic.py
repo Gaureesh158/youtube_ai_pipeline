@@ -1,19 +1,23 @@
-import openai
-from utils import write_file
+import random
 
-import os
-openai.api_key = os.getenv("OPENAI_API_KEY")
+hinglish_topics = [
+    "This AI tool can earn you ₹50,000 per month without coding",
+    "Top 5 AI websites that Indians are secretly using in 2026",
+    "This free AI can replace 5 hours of your daily work",
+    "People are using this AI tool to make money online",
+    "This AI website is better than ChatGPT for earning"
+]
 
+hindi_topics = [
+    "ये AI टूल आपको घर बैठे पैसे कमा कर दे सकता है",
+    "ये AI आपकी नौकरी खतरे में डाल सकता है",
+    "ये फ्री AI टूल आपको अमीर बना सकता है",
+    "ये AI वेबसाइट बहुत कम लोग जानते हैं",
+]
 
-def generate_topic():
-    prompt = "Give me a trending Hindi topic for YouTube video in 2026 (viral & interesting)"
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role":"user", "content":prompt}]
-    )
-    topic = response.choices[0].message.content.strip()
-    write_file("topic.txt", topic)
-    print("Topic Generated:", topic)
-
-if __name__ == "__main__":
-    generate_topic()
+def generate_topic(video_number):
+    # 80% Hinglish, 20% Hindi
+    if video_number % 5 == 0:
+        return random.choice(hindi_topics)
+    else:
+        return random.choice(hinglish_topics)
