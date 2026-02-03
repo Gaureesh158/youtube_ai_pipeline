@@ -1,0 +1,51 @@
+name: YouTube AI Video Pipeline
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # daily at 6AM
+  workflow_dispatch:
+
+jobs:
+  build-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install Dependencies
+        run: |
+          pip install openai gtts moviepy pillow requests
+
+      - name: Generate Topic
+        run: python generate_topic.py
+
+      - name: Generate Script
+        run: python script_generator.py
+
+      - name: Generate AI Video Clips
+        run: |
+          echo "Trigger Colab Notebook to generate AI animated clips"
+          # use Colab API / Ngrok
+
+      - name: Generate Voiceover
+        run: python voice_generator.py
+
+      - name: Generate Music
+        run: python music_generator.py
+
+      - name: Stitch Video
+        run: python video_stitcher.py
+
+      - name: Generate Thumbnail
+        run: python thumbnail_creator.py
+
+      - name: Generate SEO
+        run: python seo_generator.py
+
+      - name: Upload to YouTube
+        run: python your_existing_upload_script.py
