@@ -1,7 +1,9 @@
 import openai
 from utils import write_file
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+import os
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 def generate_topic():
     prompt = "Give me a trending Hindi topic for YouTube video in 2026 (viral & interesting)"
