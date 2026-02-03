@@ -1,7 +1,9 @@
 import openai
 from utils import read_file, write_file
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+import os
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 topic = read_file("topic.txt")
 prompt = f"Generate catchy YouTube video title, description, and 10 viral hashtags for topic: {topic}"
